@@ -1,9 +1,9 @@
-!pip install requests-html
-!pip install pycountry
-!pip install forex_python
-!pip install folium
-!pip install branca
-!pip install seaborn
+#!pip install requests-html
+#!pip install pycountry
+#!pip install forex_python
+#!pip install folium
+#!pip install branca
+#!pip install seaborn
 
 
 import seaborn as sns
