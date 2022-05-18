@@ -30,33 +30,7 @@ with dataset:
   )
   st.altair_chart(bar_chart, use_container_width=True)
   
-geojson_url = 'https://raw.githubusercontent.com/python-visualization/folium/master/examples/data/world-countries.json'
-response = requests.get(geojson_url)
-geojson = response.json()
-geojson['features'][0]
 
-
-map_data = df[['country_code_3', 'price_USD']]
-map_data.head()
-
-
-
-M = folium.Map(location=[20, 10], zoom_start=2)
-
-
-folium.Choropleth(
-    geo_data=geojson,
-    data=map_data,
-    columns=['country_code_3', 'price_USD'],
-    key_on='feature.id',
-    fill_color='YlGnBu',
-    fill_opacity=0.7,
-    line_opacity=0.2,
-    popup=['country_code_3'],
-    tooltip=['country_code_3','price_USD'],
-).add_to(M)
-
-M
 
   
 with features:
