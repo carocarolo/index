@@ -1,9 +1,8 @@
 import streamlit as st
 import pandas as pd
-#import plotly.express as px 
+import plotly.express as px 
 import altair as alt
-import folium
-import plotly.express as px
+#import folium
 
 
 header = st.container()
