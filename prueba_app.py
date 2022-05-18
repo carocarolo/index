@@ -3,6 +3,8 @@ import pandas as pd
 #import plotly.express as px 
 import altair as alt
 import folium
+import plotly.express as px
+
 
 header = st.container()
 dataset=st.container()
