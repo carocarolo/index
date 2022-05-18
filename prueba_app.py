@@ -41,6 +41,6 @@ with modelTraining:
   
   sel_col,disp_col=st.betacolumns(2)
   max_depth=sel_col.slider('What is the max_depth', min_value=10,max_value=100,value=20,step=10)
-  n_estimators=sel_col.selectbox('How many trees should there be?',options=(100,200,300,'No limit'), index=
+  n_estimators=sel_col.selectbox('How many trees should there be?',options=(100,200,300,'No limit'), index=0)
   input_feature=sel_col.text_input('Which feature should be used','PULocationID')
   
