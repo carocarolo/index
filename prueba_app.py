@@ -22,9 +22,11 @@ with dataset:
   dataframe=pd.DataFrame(data)
   
   chart_data = pd.DataFrame(['Price_USD', 'country_name'])
-  fig=px.bar(df,x='country_name',y='Price_USD', orientation='v')
-
-  st.bar_chart(fig)
+  bar_chart=alt.Chart(chart_data).mark_bar().encode(
+    y='Price_USD',
+    x='country_name',
+  )
+  st.altair_chart(bar_chart,use_container_width=free)
   
   
 with features:
