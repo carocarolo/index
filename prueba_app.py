@@ -19,7 +19,6 @@ with dataset:
   data=pd.read_csv('zara.csv')
   st.write(data.head(20))
   
-  dataframe=pd.DataFrame(data)
   
   chart_data = pd.DataFrame(['Price_USD', 'country_name'])
   bar_chart=alt.Chart(chart_data).mark_bar().encode(
