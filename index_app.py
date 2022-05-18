@@ -16,7 +16,7 @@ import pandas as pd
 from bs4 import BeautifulSoup
 import numpy as np
 #import pycountry
-import folium
+#import folium
 import branca.colormap as cmp
 
 #Create headers
