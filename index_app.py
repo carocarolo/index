@@ -13,7 +13,7 @@ import time
 import re
 import requests
 import pandas as pd
-import BeautifulSoup
+from bs4 import BeautifulSoup as bs
 import numpy as np
 #import pycountry
 #import folium
