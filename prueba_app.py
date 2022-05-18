@@ -22,8 +22,8 @@ with dataset:
   
   chart_data = pd.DataFrame(['price_USD', 'country_name'])
   bar_chart=alt.Chart(chart_data).mark_bar().encode(
-    y='price_USD',
-    x='country_name',
+    x='price_USD',
+    y='country_name',
   )
   st.altair_chart(bar_chart, use_container_width=True)
   
