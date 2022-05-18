@@ -21,6 +21,7 @@ with dataset:
   
   
   chart_data = pd.DataFrame(['price_USD', 'country_name'])
+  st.write(chart_data.head(20))
   bar_chart=alt.Chart(chart_data).mark_bar().encode(
     y='price_USD:Q',
     x='country_name:O',
