@@ -20,7 +20,7 @@ with dataset:
   st.write(data.head(20))
   
   
-  chart_data = pd.DataFrame(['price_USD', 'country_name'])
+  chart_data = pd.DataFrame(data['price_USD', 'country_name'])
   st.write(chart_data.head(20))
   bar_chart=alt.Chart(chart_data).mark_bar().encode(
     y='price_USD:Q',
