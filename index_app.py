@@ -38,7 +38,7 @@ print(country_urls)
 dresslist=[]
 for url in country_urls:
     r=requests.get(url,headers=headers)
-    soup=BeautifulSoup(r.content,'lxml')
+    soup=bs(r.content,'lxml')
     name=soup.find('h1',class_='product-detail-info__header-name').text.strip()
     price=soup.find('span',class_='price-current__amount').text.strip()
     dress={
