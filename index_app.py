@@ -1,4 +1,4 @@
-pip install requests-html
+!pip install requests-html
 !pip install pycountry
 !pip install forex_python
 !pip install folium
