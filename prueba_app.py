@@ -13,7 +13,7 @@ with header:
 with dataset: 
   st.title('Welcome to my life project')
   st.text('In this project I look into transactions')
-  data=pd.read_csv('C:/Users/Carolina Mendoza/Documents/Applied Analytics/Proyectos/zara.csv')
+  data=pd.read_csv('zara.csv')
   
 with features:
   st.title('Welcome to my life project')
