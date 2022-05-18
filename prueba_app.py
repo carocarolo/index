@@ -25,7 +25,7 @@ with dataset:
     y='Price_USD',
     x='country_name',
   )
-  st.altair_chart(bar_chart)
+  st.altair_chart(bar_chart, use_container_width=free)
   
   
 with features:
