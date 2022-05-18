@@ -3,6 +3,7 @@ import pandas as pd
 import plotly.express as px 
 import altair as alt
 #import folium
+import requests
 
 
 header = st.container()
@@ -29,7 +30,7 @@ with dataset:
   )
   st.altair_chart(bar_chart, use_container_width=True)
   
-  geojson_url = 'https://raw.githubusercontent.com/python-visualization/folium/master/examples/data/world-countries.json'
+geojson_url = 'https://raw.githubusercontent.com/python-visualization/folium/master/examples/data/world-countries.json'
 response = requests.get(geojson_url)
 geojson = response.json()
 geojson['features'][0]
