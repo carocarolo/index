@@ -17,7 +17,7 @@ with features:
   st.title('Welcome to my life project')
   st.text('In this project I look into transactions')
   
-with model_trainings:
+with modelTraining:
   st.title('Welcome to my life project')
   st.text('In this project I look into transactions')
   
