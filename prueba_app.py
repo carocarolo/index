@@ -12,26 +12,21 @@ features=st.container()
 modelTraining=st.container()
 
 with header: 
-  st.title('Welcome to my life project')
-  st.text('In this project I look into transactions')
-  
+  st.title('The Zara Index')
+  st.text('The Zara Index is a proxy to estimate in what countries fashion is more affordable and understand the difference of prices across different countries ')
+  st.subheader('How was this index born?')
+  st.text('This index was born on a trip to Venice')
+
 with dataset: 
-  st.title('Welcome to my life project')
-  st.text('In this project I look into transactions')
+  st.subheader('How much is this dress in every country of the world?')
   data=pd.read_csv('zara.csv')
-  st.write(data.head(20))
-  
-  st.subheader('This is a subheader')
   chart_data = pd.DataFrame(data)
-  st.write(chart_data.head(20))
   bar_chart=alt.Chart(chart_data).mark_bar().encode(
-    y='price_USD:Q',
+    y=alt.Y('price_USD:Q', sort='-x'),
     x='country_name:O',
   )
   st.altair_chart(bar_chart, use_container_width=True)
   
-
-
   
 with features:
   st.title('Welcome to my life project')
