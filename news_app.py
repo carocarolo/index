@@ -3,8 +3,7 @@ import pandas as pd
 import json
 import streamlit as st
 import altair as alt
-import SparkConf
-#from pyspark.conf import SparkConf
+from pyspark.conf import SparkConf
 from pyspark import SparkContext
 from pyspark.sql import SQLContext
 
