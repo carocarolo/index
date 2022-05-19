@@ -2,7 +2,7 @@ import requests
 import pandas as pd
 import json
 import streamlit as st
-import Altair as alt
+import altair as alt
 
 ticker=st.selectbox('Select ticker',('AAPL','EC'))
 st.write('You selected:', ticker)
