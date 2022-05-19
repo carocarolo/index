@@ -2,6 +2,7 @@ import requests
 import pandas as pd
 import json
 import streamlit as st
+import Altair as alt
 
 ticker=st.selectbox('Select ticker',('AAPL','EC'))
 st.write('You selected:', ticker)
@@ -15,8 +16,15 @@ r = requests.get(url)
 result = r.json()
 
 aapl = result['values']
-pt=pd.DataFrame(aapl)
+df=pd.DataFrame(aapl)
 
+#Create line graph 
+line_chart = alt.Chart(df).mark_line().encode(
+  x=alt.X('datetime:N'),
+  y=alt.Y('close:Q'),
+  color=alt.Color("name:N")
+).properties(title="Hello World")
+st.altair_chart(line_chart, use_container_width=True)
 
 #Retrieve News Data 
 fmt_news = f'https://eodhistoricaldata.com/api/news?api_token=OeAFFmMliFG5orCUuwAKQ8l4WWFQ67YX&s={ticker}'
