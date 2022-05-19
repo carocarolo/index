@@ -3,6 +3,9 @@ import pandas as pd
 import json
 import streamlit as st
 import altair as alt
+from pyspark.conf import SparkConf
+from pyspark import SparkContext
+from pyspark.sql import SQLContext
 
 ticker=st.selectbox('Select ticker',('AAPL','EC'))
 st.write('You selected:', ticker)
