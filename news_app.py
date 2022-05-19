@@ -1,8 +1,11 @@
+pip install pyspark
+
 import requests
 import pandas as pd
 import json
 import streamlit as st
 import altair as alt
+import pyspark
 #from pyspark.conf import SparkConf
 #from pyspark import SparkContext
 #from pyspark.sql import SQLContext
