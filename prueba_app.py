@@ -22,8 +22,8 @@ with dataset:
   data=pd.read_csv('zara.csv')
   chart_data = pd.DataFrame(data)
   bar_chart=alt.Chart(chart_data).mark_bar().encode(
-    y=alt.Y('price_USD:Q', sort='-x'),
-    x='country_name:O',
+    y='price_USD:Q',
+    x=alt.X('country_name:O',sort='-y'),
   )
   st.altair_chart(bar_chart, use_container_width=True)
   
