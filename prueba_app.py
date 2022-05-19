@@ -10,7 +10,7 @@ header = st.container()
 all_countries=st.container()
 top10=st.container()
 bottom10=st.container()
-sidebar=st.sidebar()
+
 
 st.sidebar.title("Welcome Streamlitters!")
 
