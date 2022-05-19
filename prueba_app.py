@@ -7,9 +7,9 @@ import requests
 
 
 header = st.container()
-dataset=st.container()
-features=st.container()
-modelTraining=st.container()
+all_countries=st.container()
+top10=st.container()
+bottom10=st.container()
 
 with header: 
   st.title('The Zara Index')
@@ -17,7 +17,10 @@ with header:
   st.subheader('How was this index born?')
   st.text('This index was born on a trip to Venice')
 
-with dataset: 
+with st.sidebar:
+    my_component(greeting="hello")
+  
+with all_countries: 
   st.subheader('How much is this dress in every country of the world?')
   data=pd.read_csv('zara.csv')
   chart_data = pd.DataFrame(data)
@@ -35,13 +38,13 @@ with dataset:
   st.altair_chart(bar_chart, use_container_width=True)
   
   
-with features:
+with top10:
   st.title('Welcome to my life project')
   st.text('In this project I look into transactions')
   st.markdown('* **first feature:**I created this ')
   st.markdown('* **second feature:**I created this ')
   
-with modelTraining:
+with bottom10:
   st.title('Welcome to my life project')
   st.text('In this project I look into transactions')
   
