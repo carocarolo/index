@@ -3,7 +3,7 @@ import pandas as pd
 import json
 import streamlit as st
 
-ticker=st.selectbox('Select ticker',(AAPL,EC))
+ticker=st.selectbox('Select ticker',('AAPL','EC'))
 st.write('You selected:', ticker)
 btn=st.button('Buscar')
 
