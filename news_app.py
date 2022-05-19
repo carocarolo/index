@@ -9,7 +9,7 @@ btn=st.button('Buscar')
 
 #Establishing URL parameters
 if btn:
-  fmt = f'https://api.twelvedata.com/time_series?symbol={ticker}&interval=1day&apikey=demo&source=docs'
+  url = f'https://api.twelvedata.com/time_series?symbol={ticker}&interval=1day&apikey=demo&source=docs'
 
 #Retrieving data from Website
 r = requests.get(url)
