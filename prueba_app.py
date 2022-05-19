@@ -10,6 +10,7 @@ header = st.container()
 all_countries=st.container()
 top10=st.container()
 bottom10=st.container()
+sidebar=st.sidebar()
 
 with header: 
   st.title('The Zara Index')
@@ -17,7 +18,7 @@ with header:
   st.subheader('How was this index born?')
   st.text('This index was born on a trip to Venice')
 
-with st.sidebar:
+with sidebar:
     my_component(greeting="hello")
   
 with all_countries: 
