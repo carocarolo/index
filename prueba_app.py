@@ -25,6 +25,13 @@ with dataset:
     y=alt.Y('country_name:O',sort='-x'),
     x='price_USD:Q',
   )
+  text = bar_chart.mark_text(
+    align='left',
+    baseline='middle',
+    dx=3  # Nudges text to right so it doesn't appear on top of the bar
+).encode(
+    text='price_USD:Q'
+)
   st.altair_chart(bar_chart, use_container_width=True)
   
   
