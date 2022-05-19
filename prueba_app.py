@@ -1,6 +1,4 @@
 import streamlit as st
-from streamlit_option_menu import option_menu
-import streamlit.components.v1 as html
 import pandas as pd
 #import plotly.express as px 
 import altair as alt
@@ -13,6 +11,8 @@ all_countries=st.container()
 top10=st.container()
 bottom10=st.container()
 sidebar=st.sidebar()
+
+st.sidebar.title("Welcome Streamlitters!")
 
 with header: 
   st.title('The Zara Index')
