@@ -21,9 +21,8 @@ df=pd.DataFrame(aapl)
 #Create line graph 
 line_chart = alt.Chart(df).mark_line().encode(
   x=alt.X('datetime:N'),
-  y=alt.Y('close:Q'),
-  color=alt.Color("name:N")
-).properties(title="Hello World")
+  y=alt.Y('close:Q', scale=alt.Scale(domain=(y_data_min, y_data_max )))
+).properties(title="Hello World") #Agregar Titulo dependiendo del valor de ticker
 st.altair_chart(line_chart, use_container_width=True)
 
 #Retrieve News Data 
