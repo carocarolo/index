@@ -3,7 +3,8 @@ import pandas as pd
 import json
 import streamlit as st
 
-ticker=st.selectbox('Select ticker',options=(AAPL,EC), index=0)
+ticker=st.selectbox('Select ticker',(AAPL,EC))
+st.write('You selected:', ticker)
 btn=st.button('Buscar')
 
 #Establishing URL parameters
