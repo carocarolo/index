@@ -18,6 +18,9 @@ result = r.json()
 aapl = result['values']
 df=pd.DataFrame(aapl)
 
+y_data_max = df['close'].max()
+y_data_min = df['close'].min()
+
 #Create line graph 
 line_chart = alt.Chart(df).mark_line().encode(
   x=alt.X('datetime:N'),
