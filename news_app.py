@@ -1,24 +1,38 @@
+#pip install pyspark
+#pip install streamlit
+
+import streamlit as st
 import requests
 import pandas as pd
-import json
-import streamlit as st
 import altair as alt
-#import pyspark
-from pyspark import SparkConf
-#from pyspark import SparkContext
-#from pyspark.sql import SQLContext
+from textblob import TextBlob
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+from sklearn.feature_extraction.text import CountVectorizer
+from nltk import word_tokenize
+import datetime
 
+#Select Ticker
 ticker=st.selectbox('Select ticker',('AAPL','EC'))
-st.write('You selected:', ticker)
-btn=st.button('Buscar')
+
+#Select Date 
+today = datetime.date.today()
+tomorrow = today + datetime.timedelta(days=1)
+start_date = st.date_input('Start date', today)
+st.text(start_date)
+end_date = st.date_input('End date', tomorrow)
+if start_date > end_date:
+    st.error('Error: End date must fall after start date.')
+
 
 #Establishing URL parameters
-url = f"https://api.twelvedata.com/time_series?symbol=AAPL&interval=1day&apikey=demo&source=docs"
+url = f"https://api.twelvedata.com/time_series?start_date={start_date}&end_date={end_date}&symbol=AAPL&interval=1day&apikey=demo&source=docs"
+
 
 #Retrieving data from Website
 r = requests.get(url)
 result = r.json()
-
+#st.json(result)
 aapl = result['values']
 df=pd.DataFrame(aapl)
 
@@ -29,11 +43,142 @@ y_data_min = df['close'].min()
 line_chart = alt.Chart(df).mark_line().encode(
   x=alt.X('datetime:N'),
   y=alt.Y('close:Q', scale=alt.Scale(domain=(y_data_min, y_data_max )))
-).properties(title="Hello World") #Agregar Titulo dependiendo del valor de ticker
+).properties(title=f"{ticker} Close Price") #Agregar Titulo dependiendo del valor de ticker
 st.altair_chart(line_chart, use_container_width=True)
 
+
+
 #Retrieve News Data 
-fmt_news = f'https://eodhistoricaldata.com/api/news?api_token=OeAFFmMliFG5orCUuwAKQ8l4WWFQ67YX&s={ticker}'
-r_news = requests.get(url)
+
+#Set up NEWS API 
+
+r_news = requests.get(f"https://eodhistoricaldata.com/api/news?api_token=OeAFFmMliFG5orCUuwAKQ8l4WWFQ67YX&s={ticker}&from={start_date}&to={end_date}")
 result_news = r_news.json()
+#print (type(result_news).__name__)
+#print(result_news)
+
+df = pd.DataFrame(result_news)
+
+
+
+from textblob import TextBlob
+from wordcloud import WordCloud
+import matplotlib.pyplot as plt
+from sklearn.feature_extraction.text import CountVectorizer
+from nltk import word_tokenize
+
+
+#Polarity - Text not clean
+df['polarity'] = df['content'].apply(lambda tweet: TextBlob(tweet).sentiment.polarity)
+polarity=df['polarity'].mean()
+st.metric(label="Polarity", value=polarity)
+
+#Sentiment - Text not clean
+def getAnalysis(score):
+  if score < 0:
+    return 'Negative'
+  elif score == 0:
+    return 'Neutral'
+  else:
+    return 'Positive'
+df['TextBlob_Analysis'] =df['polarity'].apply(getAnalysis )
+
+
+import nltk
+#nltk.download('punkt')
+from sklearn.feature_extraction.text import CountVectorizer,TfidfVectorizer,ENGLISH_STOP_WORDS
+
+
+import os
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+import itertools
+import collections
+
+import tweepy as tw
+import nltk
+from nltk.corpus import stopwords
+import re
+import networkx
+import numpy as np
+
+#Pasar columna a lista 
+list_of_content = df['content'].tolist()
+#print(list_of_content)
+
+#Remover Símbolos
+def remove_url(txt):
+
+    return " ".join(re.sub("([^0-9A-Za-z \t])|(\w+:\/\/\S+)", "", txt).split())
+
+#Generar lista sin símbolos
+all_no_urls = [remove_url(signos) for signos in list_of_content]
+
+##Generar lista en minúsculas, juntar todos los diccionarios 
+words = [article.lower().split() for article in all_no_urls]
+all_words_no_urls = list(itertools.chain(*words))
+
+import nltk
+from nltk.corpus import stopwords
+#nltk.download('stopwords')
+
+#Determinar stopwords
+stop_words = set(stopwords.words('english'))
+
+##Remover stopwords de words 
+for all_words in words:
+    for word in all_words:
+        tweets_nsw = [[word for word in tweet_words if not word in stop_words]
+              for tweet_words in words]
+
+#Crear lista collection_words
+collection_words = ['inc', 'apple', '2022','shares','aapl','stock','2021','also','may','price','million','billion','company','stocks','markets','year','analyst','year','quarter','value']
+
+#Quitar las collection words 
+tweets_nsw_nc = [[w for w in word if not w in collection_words]
+                 for word in tweets_nsw]
+
+
+# Flatten list of words in clean tweets
+all_words_nsw_nc = list(itertools.chain(*tweets_nsw_nc))
+
+# Create counter of words in clean tweets
+counts_nsw_nc = collections.Counter(all_words_nsw_nc)
+
+#Pasar a DatFrame
+clean_tweets_ncw = pd.DataFrame(counts_nsw_nc.most_common(15),
+                             columns=['words', 'count'])
+
+
+#Crear plot final
+fig, ax = plt.subplots(figsize=(8, 8))
+
+# Plot horizontal bar graph
+clean_tweets_ncw.sort_values(by='count').plot.barh(x='words',
+                      y='count',
+                      ax=ax,
+                      color="purple")
+
+ax.set_title("Common Words Found in Articles")
+
+plt.show()
+st.pyplot(fig)
+
+
+df['polarity'] = df['content'].apply(lambda tweet: TextBlob(tweet).sentiment.polarity)
+
+def getAnalysis(score):
+  if score < 0:
+    return 'Negative'
+  elif score == 0:
+    return 'Neutral'
+  else:
+    return 'Positive'
+df['TextBlob_Analysis'] =df['polarity'].apply(getAnalysis )
+
+sentiment_score=df['polarity'].mean()
+
+
+
 
