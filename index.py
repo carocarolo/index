@@ -15,7 +15,7 @@ import branca.colormap as cm
 data=pd.read_csv('zara.csv')
 chart_data = pd.DataFrame(data)
 
-st.sidebar.title("Welcome Streamlitters!")
+#st.sidebar.title("Welcome Streamlitters!")
 
 
 st.title('The Zara Index')
@@ -46,9 +46,7 @@ q75=int(round(quantile_75.item()))
   
 #Create map 
 
-M = folium.Map(location=[20, 10], zoom_start=2)
-#st.markdown('<iframe src="/map.html"> </iframe>')
-
+M = folium.Map(location=[20, 10], zoom_start=1,max_bounds=True,height="%100",)
 
 folium.Choropleth(
      geo_data=geojson,
