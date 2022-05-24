@@ -1,7 +1,8 @@
 
 import streamlit as st
+from streamlit_folium import st_folium
 import pandas as pd
-import plotly.express as px 
+import plotly.graph_objs as go 
 import altair as alt
 import requests
 from textblob import TextBlob
@@ -11,7 +12,7 @@ import branca.colormap as cm
 
 
 
-data=pd.read_csv('zara.csv')
+data=pd.read_csv('C:/Users/Carolina Mendoza/Documents/Applied Analytics/Proyectos/streamlit/Index/zara.csv')
 chart_data = pd.DataFrame(data)
 
 st.sidebar.title("Welcome Streamlitters!")
@@ -44,25 +45,29 @@ q50=int(round(quantile_50.item()))
 q75=int(round(quantile_75.item()))
   
 #Create map 
-  
+
 M = folium.Map(location=[20, 10], zoom_start=2)
+#st.markdown('<iframe src="/map.html"> </iframe>')
+
 
 folium.Choropleth(
-  geo_data=geojson,
-  data=map_data,
-  columns=['country_code_3', 'price_USD'],
-  threshold_scale=[min1-2, q25, q50, q75,100,max1+1],
-  key_on='feature.id',
-  fill_color='YlGnBu',
-  fill_opacity=1,
-  line_opacity=0.2,
-  nan_fill_color="White",
-  popup=['country_code_3'],
-  tooltip=['country_code_3','price_USD'],
-  smooth_factor=0
+     geo_data=geojson,
+     data=map_data,
+     columns=['country_code_3', 'price_USD'],
+     threshold_scale=[min1-2, q25, q50, q75,100,max1+1],
+     key_on='feature.id',
+     fill_color='YlGnBu',
+     fill_opacity=1,
+     line_opacity=0.2,
+     nan_fill_color="White",
+     popup=['country_code_3'],
+     tooltip=['country_code_3','price_USD'],
+     smooth_factor=0
 ).add_to(M)
 
-M
+#M
+
+st_data=st_folium(M)
 
 st.subheader('How much is this dress in every country of the world?')
 bar_chart=alt.Chart(chart_data).mark_bar().encode(
