@@ -12,7 +12,7 @@ import branca.colormap as cm
 
 
 
-data=pd.read_csv('C:/Users/Carolina Mendoza/Documents/Applied Analytics/Proyectos/streamlit/Index/zara.csv')
+data=pd.read_csv('zara.csv')
 chart_data = pd.DataFrame(data)
 
 st.sidebar.title("Welcome Streamlitters!")
